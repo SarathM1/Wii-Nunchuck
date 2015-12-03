@@ -44,13 +44,13 @@ void check(int val,int x,int y,char str1[10],char str2[10],char str3[10])
 {
   if(val <= x)
     Serial.write(str1);
-  else if(val >= 176)
+  else if(val >= y)
     Serial.write(str2);
   else
     Serial.write(str3); 
    
    Serial.write("( ") ;
-   Serial.print(val,HEX);
+   Serial.print(val,DEC);
    Serial.write(" )");
 }
 void i2c_read()
