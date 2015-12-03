@@ -18,12 +18,8 @@ import java.awt.Robot;
 
 void draw()
 {
-  int i;
-  for(i=0;i<=200;i++)
-  {
-    myRobot.mouseMove(i, i);
-    delay(10);
-  }
+    myRobot.mouseMove(1350, 750);
 }
+
 
  
