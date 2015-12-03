@@ -26,10 +26,6 @@ void loop()
     Serial.write("Centre");
     
   Serial.write(',');
-    
-  Serial.print(joyX,HEX);
-
-  Serial.write(',');
 
   if(joyY <= 70)
     Serial.write("Down");
@@ -39,11 +35,22 @@ void loop()
     Serial.write("Centre");
   
   Serial.write(',');
+
+  if(joyY <= 70)
+    Serial.write("Down");
+  else if(joyY >=  176)
+    Serial.write("Up");
+  else
+    Serial.write("Centre");
+      
+  Serial.write(',');
+  Serial.print(accelX,HEX);
   
-  Serial.print(joyY,HEX);
+  Serial.write(',');
+  Serial.print(accelY,HEX);
   
   Serial.write("\r\n");
-  delay(20);
+  delay(100);
   
 }
 
