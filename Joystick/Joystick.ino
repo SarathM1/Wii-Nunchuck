@@ -18,46 +18,40 @@ void loop()
   int accelY = rawData[3];
   int accelZ = rawData[4] ;
   
-  check(78,176,"left","right","centre");
-  if(joyX <= 78)
-    Serial.write("left");
-  else if(joyX >= 176)
-    Serial.write("Right");
-  else
-    Serial.write("Centre");
+  check(joyX,78,176,"left","right","centre");
+  
     
   Serial.write(',');
-
-  if(joyY <= 70)
-    Serial.write("Down");
-  else if(joyY >=  176)
-    Serial.write("Up");
-  else
-    Serial.write("Centre");
   
+  check(joyY,78,176,"down","up","centre");
+   
   Serial.write(',');
 
-  if(joyY <= 70)
-    Serial.write("Down");
-  else if(joyY >=  176)
-    Serial.write("Up");
-  else
-    Serial.write("Centre");
-      
-  Serial.write(',');
-  Serial.print(accelX,HEX);
+  check(accelX,100,150,"pitchLeft","pitchRight","centre");
   
   Serial.write(',');
-  Serial.print(accelY,HEX);
+  check(accelY,115,164,"rollUp","rollDown","centre");
+  
+  //Serial.write(',');
+  //Serial.print(accelZ,HEX);
   
   Serial.write("\r\n");
   delay(100);
   
 }
 
-void check(int x,int z,char str1[10],char str2[10],char str3[10])
+void check(int val,int x,int y,char str1[10],char str2[10],char str3[10])
 {
-  
+  if(val <= x)
+    Serial.write(str1);
+  else if(val >= 176)
+    Serial.write(str2);
+  else
+    Serial.write(str3); 
+   
+   Serial.write("( ") ;
+   Serial.print(val,HEX);
+   Serial.write(" )");
 }
 void i2c_read()
 {
