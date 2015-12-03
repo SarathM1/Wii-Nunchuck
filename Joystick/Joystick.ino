@@ -18,6 +18,7 @@ void loop()
   int accelY = rawData[3];
   int accelZ = rawData[4] ;
   
+  check(78,176,"left","right","centre");
   if(joyX <= 78)
     Serial.write("left");
   else if(joyX >= 176)
@@ -54,6 +55,10 @@ void loop()
   
 }
 
+void check(int x,int z,char str1[10],char str2[10],char str3[10])
+{
+  
+}
 void i2c_read()
 {
   int i = 0;
