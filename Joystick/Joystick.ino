@@ -17,6 +17,9 @@ void loop()
   int accelX = rawData[2];
   int accelY = rawData[3];
   int accelZ = rawData[4] ;
+  int btnZ = bitRead(rawData[5],0);
+  int btnC = bitRead(rawData[5],1);
+  
   
   check(joyX,78,176,"left","right","centre");
   
@@ -32,8 +35,11 @@ void loop()
   Serial.write(',');
   check(accelY,115,164,"rollUp","rollDown","centre");
   
-  //Serial.write(',');
-  //Serial.print(accelZ,HEX);
+  Serial.write(',');
+  Serial.print(btnZ);
+  
+  Serial.write(',');
+  Serial.print(btnC);
   
   Serial.write("\r\n");
   delay(100);
