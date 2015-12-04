@@ -1,6 +1,7 @@
 import processing.serial.*;
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 Robot myRobot;
 Serial myPort;  
@@ -39,10 +40,16 @@ void draw()
   else if (values[2]>=180)
     y-=offset;
 
+  if (values[3]==0)
+  {
+    myRobot.mousePress(InputEvent.BUTTON1_MASK);
+    myRobot.mouseRelease(InputEvent.BUTTON1_MASK);
+  }
+  
   x = constrain(x, 0, 1355);
   y = constrain(y, 0, 755);
   myRobot.mouseMove(x, y);
-  println(x, y);
+  println(x, y, values[3]);
 }
 
 void serialEvent(Serial myPort) 
