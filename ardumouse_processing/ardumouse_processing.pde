@@ -7,68 +7,52 @@ Serial myPort;
 String val;  
 int linefeed = 10; // 10 - ASCII for linefeed
 int values[];
-int  x=0,y=0;
+int  x=0, y=0;
 int offset = 3;
+int offset2 = 0;
 
 void setup()
 {
-  
-  myPort = new Serial(this,"/dev/ttyACM0",9600);
+
+  myPort = new Serial(this, "/dev/ttyACM0", 9600);
   delay(500);
   try
   {
-     myRobot = new Robot();
+    myRobot = new Robot();
   }
   catch(AWTException e)
   {
-     e.printStackTrace();
+    e.printStackTrace();
   }
-  
 }
 
 void draw()
 {
-  
-  if(values[1]<=80)
+  if (values[1]<=80)
     x-=offset;
-  else if(values[1]>=180)
-   x+=offset;
-  
-  if(values[2]<=80)
-   y+=offset;
-  else if(values[2]>=180)
+
+  else if (values[1]>=180)
+    x+=offset;
+
+  if (values[2]<=80)
+    y+=offset;
+
+  else if (values[2]>=180)
     y-=offset;
-  
-  x = constrain(x,0,1355);
-  y = constrain(y,0,755);
+
+  x = constrain(x, 0, 1355);
+  y = constrain(y, 0, 755);
   myRobot.mouseMove(x, y);
-  println(x,y);
-  
+  println(x, y);
 }
 
-void serialEvent(Serial myPort) {
+void serialEvent(Serial myPort) 
+{
+  String myString = myPort.readStringUntil(linefeed);   // if you got any bytes other than the linefeed:
 
-  // read the serial buffer:
-  String myString = myPort.readStringUntil(linefeed);
-
-  // if you got any bytes other than the linefeed:
-  if (myString != null) {
-
+  if (myString != null) 
+  {  
     myString = trim(myString);
-
-    // split the string at the commas
-    // and convert the sections into integers:
-
-   
     values = int(split(myString, ','));
-
-    // print out the values you got:
-    
-    /*for (int i = 1; i <=2; i++) {
-      print("Values " + i + ": " + values[i] + "\t");
-    }*/
-    //println();// add a linefeed after all the sensor values are printed:
-    
-    
   }
 }
