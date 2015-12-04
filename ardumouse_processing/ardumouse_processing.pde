@@ -8,11 +8,13 @@ String val;
 int linefeed = 10; // 10 - ASCII for linefeed
 int values[];
 int  x=0,y=0;
+int offset = 3;
 
 void setup()
 {
   
   myPort = new Serial(this,"/dev/ttyACM0",9600);
+  delay(500);
   try
   {
      myRobot = new Robot();
@@ -21,20 +23,25 @@ void setup()
   {
      e.printStackTrace();
   }
+  
 }
 
 void draw()
 {
+  
   if(values[1]<=80)
-    myRobot.mouseMove(x++, y);
+    x-=offset;
   else if(values[1]>=180)
-    myRobot.mouseMove(x--, y);
+   x+=offset;
   
   if(values[2]<=80)
-    myRobot.mouseMove(x, y++);
+   y+=offset;
   else if(values[2]>=180)
-    myRobot.mouseMove(x, y--);
-    
+    y-=offset;
+  
+  x = constrain(x,0,1355);
+  y = constrain(y,0,755);
+  myRobot.mouseMove(x, y);
   println(x,y);
   
 }
