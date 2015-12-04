@@ -9,7 +9,6 @@ int linefeed = 10; // 10 - ASCII for linefeed
 int values[];
 int  x=0, y=0;
 int offset = 3;
-int offset2 = 0;
 
 void setup()
 {
